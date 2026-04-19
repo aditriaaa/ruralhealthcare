@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Patient - RuralHealth</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <main>
+    <div id="patient-ui">
+      <h2 data-i18n="patient.title">Patient - Enter Your Location</h2>
+      <input id="patientName" placeholder="Your name" data-i18n-placeholder="common.yourName" />
+
+      <div class="location-options">
+        <label><input type="radio" name="patientLoc" value="geo" checked /> <span data-i18n="common.useCurrentLocation">Use current location</span></label>
+        <label><input type="radio" name="patientLoc" value="manual" /> <span data-i18n="common.enterAddressManually">Enter address manually</span></label>
+      </div>
+
+      <div id="patientManual" style="display: none;" class="manual-entry">
+        <input id="patientAddress" placeholder="Search address (e.g., 123 Main St, Springfield, USA)" data-i18n-placeholder="patient.searchAddress" class="address-input" />
+        <div id="patientAddrList" class="suggestions"></div>
+      </div>
+
+      <button id="initiatePatient" data-i18n="common.continue">Continue</button>
+      <div id="patientStatus"></div>
+
+      <div id="patientMain" style="display: none;">
+        <h3 data-i18n="patient.nearbyProviders">Nearby Providers</h3>
+        <div id="map" style="height: 400px;"></div>
+        <div id="chatArea" class="hidden">
+          <div id="chatLog"></div>
+          <div class="chat-input-area">
+            <input id="chatInput" placeholder="Message..." data-i18n-placeholder="common.message" />
+            <button type="button" id="cameraBtn" title="Take Photo" data-i18n-title="common.takePhoto">📷</button>
+            <button type="button" id="fileBtn" title="Upload File" data-i18n-title="common.uploadFile">📎</button>
+            <button type="button" id="sendBtn" data-i18n="common.send">Send</button>
+          </div>
+          <input type="file" id="fileInput" accept="image/*,video/*,audio/*,application/*" style="display: none;" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/offline-assistant.js"></script>
+  <script src="/patient.js" type="module"></script>
+  <script src="/sw-register.js"></script>
+</body>
+</html>

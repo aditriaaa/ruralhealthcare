@@ -1,0 +1,81 @@
+ <!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Provider - RuralHealth</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="providerSidebarOverlay" class="provider-sidebar-overlay hidden"></div>
+  <aside id="providerSidebar" class="provider-sidebar" aria-hidden="true">
+    <button id="providerSidebarClose" class="provider-sidebar-close" type="button" data-i18n="provider.close">Close</button>
+    <nav class="provider-sidebar-nav">
+      <button id="providerChangeLocationNav" type="button" data-i18n="provider.changeLocation">Change Location</button>
+    </nav>
+  </aside>
+  <main>
+    <div id="provider-ui">
+      <h2 data-i18n="provider.title">Provider - Enter Your Location</h2>
+      <input id="providerName" placeholder="Your name" data-i18n-placeholder="common.yourName" />
+      <input id="providerSpec" placeholder="Specialty (e.g., General Practice, Pediatrics)" data-i18n-placeholder="provider.specialtyPlaceholder" />
+
+      <div class="location-options">
+        <label><input type="radio" name="providerLoc" value="geo" checked /> <span data-i18n="common.useCurrentLocation">Use current location</span></label>
+        <label><input type="radio" name="providerLoc" value="manual" /> <span data-i18n="common.enterAddressManually">Enter address manually</span></label>
+      </div>
+
+      <div id="providerManual" style="display: none;" class="manual-entry">
+        <input id="providerAddress" placeholder="Search address (e.g., 456 Oak Ave, Springfield, USA)" data-i18n-placeholder="provider.searchAddress" class="address-input" />
+        <div id="providerAddrList" class="suggestions"></div>
+      </div>
+
+      <button id="initiateProvider" data-i18n="common.continue">Continue</button>
+      <div id="providerStatus"></div>
+
+      <div id="providerMain" style="display: none;">
+        <div class="provider-main-header">
+          <button id="providerMenuBtn" type="button" class="provider-menu-btn" data-i18n="provider.menu">Menu</button>
+        </div>
+        <h3 data-i18n="provider.announceAvailability">Announce Your Availability</h3>
+        <button id="announceBtn" data-i18n="provider.goOnline">Go Online</button>
+
+        <div id="providerChangeLocationPanel" class="change-location-panel hidden">
+          <h3 data-i18n="provider.updateLocation">Update Location</h3>
+          <div class="location-options">
+            <label><input type="radio" name="changeProviderLoc" value="geo" checked /> <span data-i18n="common.useCurrentLocation">Use current location</span></label>
+            <label><input type="radio" name="changeProviderLoc" value="manual" /> <span data-i18n="common.enterAddressManually">Enter address manually</span></label>
+          </div>
+          <div id="changeProviderManual" style="display: none;" class="manual-entry">
+            <input id="changeProviderAddress" placeholder="Search address (e.g., 456 Oak Ave, Springfield, USA)" data-i18n-placeholder="provider.searchAddress" class="address-input" />
+            <div id="changeProviderAddrList" class="suggestions"></div>
+          </div>
+          <button id="saveChangedLocationBtn" type="button" data-i18n="provider.saveNewLocation">Save New Location</button>
+        </div>
+
+        <div id="mapProv" style="height: 400px;"></div>
+        <div id="chatAreaProv" class="hidden">
+          <div id="chatLogProv"></div>
+          <div class="chat-input-area">
+            <input id="chatInputProv" placeholder="Message..." data-i18n-placeholder="common.message" />
+            <button type="button" id="cameraBtnProv" title="Take Photo" data-i18n-title="common.takePhoto">📷</button>
+            <button type="button" id="fileBtnProv" title="Upload File" data-i18n-title="common.uploadFile">📎</button>
+            <button type="button" id="sendBtnProv" data-i18n="common.send">Send</button>
+          </div>
+          <input type="file" id="fileInputProv" accept="image/*,video/*,audio/*,application/*" style="display: none;" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/vendor/leaflet/leaflet.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/offline-assistant.js"></script>
+  <script src="/provider-auth.js"></script>
+  <script src="/provider.js" type="module"></script>
+  <script src="/sw-register.js"></script>
+</body>
+</html>

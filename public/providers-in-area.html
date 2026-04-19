@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Providers in Your Area - RuralHealth</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <button id="availabilityNotifyBtn" class="availability-notify-btn" type="button" aria-label="Provider notification" title="Provider notification">🔔</button>
+  <main>
+    <div id="providers-ui">
+      <h2 data-i18n="providersInArea.title">Providers in Your Area</h2>
+      <p id="providersAreaStatus" data-i18n="providersInArea.waiting">No providers are online right now. We will keep checking for you.</p>
+      <div class="assistant-cta-wrap">
+        <button type="button" class="assistant-launch-btn" data-open-offline-assistant data-i18n="assistant.chatCta">Chat with AI</button>
+      </div>
+      <div id="providersList">
+        <p data-i18n="providersInArea.hint">Keep this page open. When a provider is available, use the notification button to jump to chat.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/offline-assistant.js"></script>
+  <script src="/providers-in-area.js"></script>
+  <script src="/sw-register.js"></script>
+</body>
+</html>
