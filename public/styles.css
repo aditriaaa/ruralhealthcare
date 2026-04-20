@@ -231,6 +231,9 @@ body.intro-page .intro-screen {
 
 /* Button Styles */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -242,6 +245,7 @@ body.intro-page .intro-screen {
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .btn::before {

@@ -1,10 +1,16 @@
 // Intro screen navigation
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('patientBtn').onclick = () => {
-    window.location.href = 'patient.html';
-  };
+  const patientBtn = document.getElementById('patientBtn');
+  if (patientBtn && patientBtn.tagName !== 'A') {
+    patientBtn.onclick = () => {
+      window.location.href = '/patient.html';
+    };
+  }
 
-  document.getElementById('providerBtn').onclick = () => {
-    window.location.href = 'provider-login.html';
-  };
+  const providerBtn = document.getElementById('providerBtn');
+  if (providerBtn && providerBtn.tagName !== 'A') {
+    providerBtn.onclick = () => {
+      window.location.href = '/provider-login.html';
+    };
+  }
 });

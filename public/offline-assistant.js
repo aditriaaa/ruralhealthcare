@@ -154,7 +154,7 @@
   }
 
   function runAssistant() {
-    const content = getContent();
+    let content = getContent();
 
     const toggle = document.createElement('button');
     toggle.type = 'button';
@@ -220,6 +220,24 @@
 
     let history = [];
 
+    function refreshLocalizedUi() {
+      content = getContent();
+      toggle.setAttribute('aria-label', content.openLabel);
+      toggle.title = content.openLabel;
+      title.textContent = content.title;
+      subtitle.textContent = content.subtitle;
+      closeBtn.setAttribute('aria-label', content.closeLabel);
+      closeBtn.title = content.closeLabel;
+      input.placeholder = content.placeholder;
+      send.textContent = content.send;
+
+      // If only the initial welcome message exists, update it to the new language.
+      if (history.length === 1 && history[0].role === 'bot') {
+        history[0].text = content.welcome;
+        renderHistory();
+      }
+    }
+
     function renderHistory() {
       feed.innerHTML = '';
       history.forEach((entry) => {
@@ -278,6 +296,12 @@
     history = [{ role: 'bot', text: content.welcome, ts: Date.now() }];
 
     renderHistory();
+
+    if (window.appI18n && typeof window.appI18n.onLanguageChange === 'function') {
+      window.appI18n.onLanguageChange(() => {
+        refreshLocalizedUi();
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', runAssistant);
